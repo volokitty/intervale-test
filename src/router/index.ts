@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/pages/Home.vue";
 import Entity from "@/pages/Entity.vue";
+import EntityElement from "@/pages/EntityElement.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/:entity",
     component: Entity,
+  },
+  {
+    path: "/:entity/:id",
+    component: EntityElement,
   },
 ];
 
