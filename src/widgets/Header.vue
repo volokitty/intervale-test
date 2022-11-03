@@ -1,6 +1,8 @@
 <template>
   <header>
-    <div class="content">header</div>
+    <div class="content">
+      <RouterLink to="/">Home</RouterLink>
+    </div>
   </header>
 </template>
 
@@ -18,7 +20,10 @@ header {
 }
 
 .content {
+  display: flex;
+  align-items: center;
   max-width: var(--content-width);
   margin: 0 auto;
+  height: 100%;
 }
 </style>

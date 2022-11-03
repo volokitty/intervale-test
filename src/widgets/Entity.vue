@@ -1,33 +1,22 @@
 <template>
-  <div class="entity" @click="$router.push(`/${entityName?.toLowerCase()}`)">
-    {{ entityName }}
-  </div>
+  <RouterCard :text="entityName" @routerCardClick="click" />
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+import RouterCard from "@/shared/ui/RouterCard.vue";
+
+export default defineComponent({
   name: "EntityWidget",
   props: {
     entityName: String,
   },
-};
+  components: { RouterCard },
+
+  methods: {
+    click(entityName: string) {
+      this.$router.push(`/${entityName.toLowerCase()}?page=1`);
+    },
+  },
+});
 </script>
-
-<style scoped>
-.entity {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 200px;
-  border-radius: 20px;
-  border: 1px solid lightgray;
-  cursor: pointer;
-  user-select: none;
-}
-
-.entity:hover {
-  color: white;
-  background-color: steelblue;
-}
-</style>

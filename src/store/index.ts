@@ -17,7 +17,7 @@ export default createStore<State>({
   },
   actions: {
     getEntities({ commit }) {
-      axios.get("https://swapi.dev/api/").then((res) => {
+      axios.get(`${process.env.VUE_APP_API_URL}`).then((res) => {
         const entities: string[] = res.data;
 
         commit(
