@@ -1,9 +1,12 @@
 <template>
   <div v-if="entities.length === 0">Загрузка...</div>
   <div v-else class="entities">
-    <Entity class="entity" v-for="entity in entities" :key="entity">
-      {{ entity }}
-    </Entity>
+    <Entity
+      class="entity"
+      v-for="entity in entities"
+      :key="entity"
+      :entity-name="entity"
+    />
   </div>
 </template>
 

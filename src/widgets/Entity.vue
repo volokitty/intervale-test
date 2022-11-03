@@ -1,12 +1,15 @@
 <template>
-  <div class="entity">
-    <slot></slot>
+  <div class="entity" @click="$router.push(`/${entityName?.toLowerCase()}`)">
+    {{ entityName }}
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "EntityWidget",
+  props: {
+    entityName: String,
+  },
 };
 </script>
 
