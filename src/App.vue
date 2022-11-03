@@ -27,6 +27,7 @@ export default {
 
 * {
   margin: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 main {

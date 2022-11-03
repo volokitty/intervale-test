@@ -14,10 +14,11 @@ export default {
 header {
   height: 40px;
   border-bottom: 1px solid lightgray;
+  margin-bottom: 24px;
 }
 
 .content {
-  width: var(--content-width);
+  max-width: var(--content-width);
   margin: 0 auto;
 }
 </style>
