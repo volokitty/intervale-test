@@ -1,26 +1,32 @@
 <template>
-  <div v-if="loading">Loading...</div>
+  <h1>{{ name }}</h1>
+  <AdditionalInformation :data="entityData" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { useStore } from "vuex";
+import AdditionalInformation from "@/shared/ui/AdditionalInformation.vue";
 
 export default defineComponent({
   name: "EntityElementPage",
+  components: { AdditionalInformation },
 
   data() {
     return {
       entity: "",
+      entityData: [] as Array<{ key: string; value: string }>,
+      name: "",
       id: 0,
-      loading: false,
+      store: useStore(),
     };
   },
 
   methods: {
     async fetchEntityElement() {
-      this.loading = true;
+      this.store.dispatch("setLoading", true);
 
       try {
         const { data } = await axios.get(
@@ -29,11 +35,25 @@ export default defineComponent({
           }`
         );
 
-        console.log(data);
+        const keys = Object.keys(data).map((key) =>
+          key
+            .split("_")
+            .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+            .join(" ")
+        );
+
+        const values: Array<string | Array<string>> = Object.values(data);
+
+        this.entityData = keys
+          .map((key, index) => ({ key, value: values[index].toString() }))
+          .map(({ key, value }) => ({
+            key,
+            value: value.length === 0 ? "No information" : value,
+          }));
       } catch {
         console.log("Error");
       } finally {
-        this.loading = false;
+        this.store.dispatch("setLoading", false);
       }
     },
   },
@@ -47,7 +67,19 @@ export default defineComponent({
 
     this.fetchEntityElement();
   },
+
+  watch: {
+    entityData() {
+      this.name = this.entityData.filter(
+        (el) => el.key === "Name" || el.key === "Title"
+      )[0].value;
+    },
+  },
 });
 </script>
 
-<style></style>
+<style scoped>
+h1 {
+  margin-bottom: 16px;
+}
+</style>

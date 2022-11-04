@@ -3,15 +3,17 @@
   <main>
     <router-view />
   </main>
+  <LoadingModal />
 </template>
 
 <script lang="ts">
 import Header from "@/widgets/Header.vue";
+import LoadingModal from "@/shared/ui/LoadingModal.vue";
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  components: { Header },
+  components: { Header, LoadingModal },
   setup() {
     const store = useStore();
 

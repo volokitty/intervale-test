@@ -1,5 +1,4 @@
 <template>
-  <div v-if="loading">Loading...</div>
   <h1>{{ entity }}</h1>
   <div class="entities">
     <EntityElement
@@ -19,6 +18,7 @@ import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import Pagination from "@/widgets/Pagination.vue";
 import EntityElement from "@/widgets/EntityElement.vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "EntityPage",
@@ -29,14 +29,14 @@ export default defineComponent({
       pagesCount: 0,
       page: 0,
       entity: "",
-      loading: false,
       entityElements: [] as { name: string; id: string | undefined }[],
+      store: useStore(),
     };
   },
 
   methods: {
     async fetchData() {
-      this.loading = true;
+      this.store.dispatch("setLoading", true);
 
       try {
         const { data } = await axios.get(
@@ -63,7 +63,7 @@ export default defineComponent({
       } catch {
         console.log("Error");
       } finally {
-        this.loading = false;
+        this.store.dispatch("setLoading", false);
       }
     },
 

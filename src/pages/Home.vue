@@ -1,9 +1,8 @@
 <template>
-  <div v-if="entities.length === 0">Загрузка...</div>
-  <div v-else class="entities">
+  <div class="entities">
     <Entity
       class="entity"
-      v-for="entity in entities"
+      v-for="entity in $store.state.entities"
       :key="entity"
       :entity-name="entity"
     />
@@ -19,12 +18,10 @@ export default {
   name: "HomePage",
   components: { Entity },
 
-  setup() {
+  mounted() {
     const store = useStore();
 
-    return {
-      entities: computed(() => store.state.entities),
-    };
+    store.dispatch("getEntities");
   },
 };
 </script>

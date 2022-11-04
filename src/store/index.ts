@@ -3,16 +3,30 @@ import axios from "axios";
 
 interface State {
   entities: string[];
+  loading: boolean;
 }
 
 export default createStore<State>({
   state: {
     entities: [],
+    loading: false,
   },
-  getters: {},
+  getters: {
+    entities(state) {
+      return state.entities;
+    },
+
+    loading(state) {
+      return state.loading;
+    },
+  },
   mutations: {
-    SET_ENTITIES(state, entities: string[]) {
+    setEntities(state, entities: string[]) {
       state.entities = entities;
+    },
+
+    setLoading(state, loading: boolean) {
+      state.loading = loading;
     },
   },
   actions: {
@@ -21,12 +35,16 @@ export default createStore<State>({
         const entities: string[] = res.data;
 
         commit(
-          "SET_ENTITIES",
+          "setEntities",
           Object.keys(entities).map(
             (entity) => `${entity[0].toUpperCase()}${entity.slice(1)}`
           )
         );
       });
+    },
+
+    setLoading({ commit }, loading) {
+      commit("setLoading", loading);
     },
   },
   modules: {},
