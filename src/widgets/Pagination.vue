@@ -31,6 +31,7 @@ export default {
 <style scoped>
 .pagination {
   display: flex;
+  margin-bottom: 24px;
 }
 
 .item {
@@ -48,5 +49,11 @@ export default {
 
 .active {
   border: 1px solid teal;
+}
+
+@media (max-width: 996px) {
+  .pagination {
+    justify-content: center;
+  }
 }
 </style>

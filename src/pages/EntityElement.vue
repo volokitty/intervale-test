@@ -82,4 +82,10 @@ export default defineComponent({
 h1 {
   margin-bottom: 16px;
 }
+
+@media (max-width: 996px) {
+  h1 {
+    text-align: center;
+  }
+}
 </style>

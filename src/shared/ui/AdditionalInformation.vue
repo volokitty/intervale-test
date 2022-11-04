@@ -31,4 +31,10 @@ td {
   word-wrap: break-word;
   border: 1px solid black;
 }
+
+@media (max-width: 996px) {
+  table {
+    padding: 0 20px;
+  }
+}
 </style>

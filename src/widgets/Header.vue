@@ -26,4 +26,10 @@ header {
   margin: 0 auto;
   height: 100%;
 }
+
+@media (max-width: 996px) {
+  .content a {
+    margin: 0 auto;
+  }
+}
 </style>

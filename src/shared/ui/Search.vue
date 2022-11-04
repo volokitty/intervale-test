@@ -44,4 +44,10 @@ button {
   border-left: none;
   cursor: pointer;
 }
+
+@media (max-width: 996px) {
+  .search {
+    justify-content: center;
+  }
+}
 </style>

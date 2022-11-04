@@ -116,4 +116,10 @@ h1 {
 .entity {
   margin-bottom: 20px;
 }
+
+@media (max-width: 996px) {
+  h1 {
+    text-align: center;
+  }
+}
 </style>
