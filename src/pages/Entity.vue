@@ -1,5 +1,6 @@
 <template>
   <h1>{{ entity }}</h1>
+  <Search v-model="searchQuery" @search="search" />
   <div class="entities">
     <EntityElement
       class="entity"
@@ -18,11 +19,12 @@ import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import Pagination from "@/widgets/Pagination.vue";
 import EntityElement from "@/widgets/EntityElement.vue";
+import Search from "@/shared/ui/Search.vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
   name: "EntityPage",
-  components: { Pagination, EntityElement },
+  components: { Pagination, EntityElement, Search },
 
   data() {
     return {
@@ -30,6 +32,7 @@ export default defineComponent({
       page: 0,
       entity: "",
       entityElements: [] as { name: string; id: string | undefined }[],
+      searchQuery: "",
       store: useStore(),
     };
   },
@@ -38,12 +41,15 @@ export default defineComponent({
     async fetchData() {
       this.store.dispatch("setLoading", true);
 
+      const search =
+        this.searchQuery.length > 0 ? `&search=${this.searchQuery.trim()}` : "";
+
+      const url = `${
+        process.env.VUE_APP_API_URL
+      }${this.entity.toLowerCase()}?page=${this.page}${search}`;
+
       try {
-        const { data } = await axios.get(
-          `${process.env.VUE_APP_API_URL}${this.entity.toLowerCase()}?page=${
-            this.page
-          }`
-        );
+        const { data } = await axios.get(url);
 
         const {
           count,
@@ -65,6 +71,10 @@ export default defineComponent({
       } finally {
         this.store.dispatch("setLoading", false);
       }
+    },
+
+    search() {
+      this.fetchData();
     },
 
     changePage(page: number) {
