@@ -10,6 +10,7 @@
       :entityElementName="entity.name"
     />
   </div>
+  <h1 v-if="entityElements.length === 0">No data</h1>
   <Pagination :count="pagesCount" :active="page" @changePage="changePage" />
 </template>
 
@@ -120,6 +121,11 @@ h1 {
 @media (max-width: 996px) {
   h1 {
     text-align: center;
+  }
+
+  .entities {
+    justify-content: center;
+    gap: 12px;
   }
 }
 </style>
