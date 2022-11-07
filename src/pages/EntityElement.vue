@@ -30,7 +30,7 @@ export default defineComponent({
 
       try {
         const { data } = await axios.get(
-          `${process.env.VUE_APP_API_URL}${this.entity.toLowerCase()}/${
+          `${process.env.VUE_APP_API_URL}/${this.entity.toLowerCase()}/${
             this.id
           }`
         );

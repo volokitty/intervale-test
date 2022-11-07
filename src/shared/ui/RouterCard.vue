@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "RouterCardUI",
   props: {
     text: String,
@@ -16,7 +18,7 @@ export default {
       this.$emit("routerCardClick", this.text);
     },
   },
-};
+});
 </script>
 
 <style scoped>

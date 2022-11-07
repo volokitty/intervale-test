@@ -13,7 +13,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "PaginationWidget",
   props: {
     count: Number,
@@ -25,7 +27,7 @@ export default {
       this.$emit("changePage", page);
     },
   },
-};
+});
 </script>
 
 <style scoped>

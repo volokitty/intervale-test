@@ -46,7 +46,7 @@ export default defineComponent({
 
       const url = `${
         process.env.VUE_APP_API_URL
-      }${this.entity.toLowerCase()}?page=${this.page}${search}`;
+      }/${this.entity.toLowerCase()}?page=${this.page}${search}`;
 
       try {
         const { data } = await axios.get(url);
